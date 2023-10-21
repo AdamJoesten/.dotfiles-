@@ -1,0 +1,45 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "ctrl+alt+shift+l l",
+        "command": "turboConsoleLog.displayLogMessage"
+    },
+    {
+        "key": "ctrl+alt+shift+l c",
+        "command": "turboConsoleLog.commentAllLogMessages"
+    },
+    {
+        "key": "ctrl+alt+shift+l u",
+        "command": "turboConsoleLog.uncommentAllLogMessages"
+    },
+    {
+        "key": "ctrl+alt+shift+l d",
+        "command": "turboConsoleLog.deleteAllLogMessages"
+    },
+    {
+        "key": "ctrl+shift+alt+space ctrl+shift+alt+space",
+        "command": "editor.action.formatDocument",
+        "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+    },
+    {
+        "key": "ctrl+shift+i",
+        "command": "-editor.action.formatDocument",
+        "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+    },
+    {
+        "key": "ctrl+alt+shift+m",
+        "command": "workbench.action.toggleMaximizedPanel"
+    },
+    {
+        "key": "ctrl+alt+shift+.",
+        "command": "workbench.action.terminal.resizePaneUp",
+    },
+    {
+        "key": "ctrl+alt+shift+,",
+        "command": "workbench.action.terminal.resizePaneDown",
+    },
+    {
+        "key": "ctrl+alt+shift+v",
+        "command": "open-in-vim.open"
+    }
+]
