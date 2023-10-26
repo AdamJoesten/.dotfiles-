@@ -5,6 +5,23 @@ curl --parallel --parallel-immediate --parallel-max 3 --config sources.txt --out
 
 # Applications
 sudo apt install -y $HOME/Downloads/1password.deb
+
+# restricted ubunut extras
+# vlc
+# remove videos
+# google chrome
+# kitty
+# fish
+# wezterm
+# git
+# asdf
+# asdf nodejs
+# asdf bun
+# asdf deno
+# asdf python
+# rustlang
+# golang
+# pnpm
 # nvim
 # docker
 # jo
