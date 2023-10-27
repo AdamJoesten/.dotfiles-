@@ -1,8 +1,9 @@
 return {
-	"neovim/nvim/lspconfig",
+	"neovim/nvim-lspconfig",
 	config = function()
 		-- Setup language servers.
 		local lspconfig = require("lspconfig")
+		local wk = require("which-key")
 		lspconfig.pyright.setup({})
 		lspconfig.tsserver.setup({})
 		lspconfig.rust_analyzer.setup({
@@ -14,10 +15,20 @@ return {
 
 		-- Global mappings.
 		-- See `:help vim.diagnostic.*` for documentation on any of the below functions
-		vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
-		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-		vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-		vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
+		wk.register({
+			["<leader>"] = {
+				l = {
+					name = "+lspconfig",
+					e = { vim.diagnostic.open_float, "open diagnostics" },
+					q = { vim.diagnostic.setloclist, "set loclist" },
+					n = {
+						name = "+navigate",
+						["["] = { vim.diagnostic.goto_prev, "goto prev diagnostic" },
+						["]"] = { vim.diagnostic.goto_next, "goto next diagnostic" },
+					},
+				},
+			},
+		})
 
 		-- Use LspAttach autocommand to only map the following keys
 		-- after the language server attaches to the current buffer
@@ -27,6 +38,7 @@ return {
 				-- Enable completion triggered by <c-x><c-o>
 				vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
+				local wk = require("which-key")
 				-- Buffer local mappings.
 				-- See `:help vim.lsp.*` for documentation on any of the below functions
 				local opts = { buffer = ev.buf }
