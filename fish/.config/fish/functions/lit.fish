@@ -1,3 +1,3 @@
-function lit --wraps='eza --tree' --description 'alias lit=eza --tree'
-    eza --tree $argv
+function lit --wraps='eza --tree --all' --description 'alias lit=eza --tree --all'
+    eza --tree --all $argv
 end
