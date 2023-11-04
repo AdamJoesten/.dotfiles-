@@ -36,7 +36,10 @@ if status is-interactive
     set -g fish_pager_color_description $comment
     set -g fish_pager_color_selected_background --background=$selection
 
-    # Init Shell Prompt
+    # Fish
+    set -g fish_greeting
+
+    # Starship
     starship init fish | source
 
     # Source asdf

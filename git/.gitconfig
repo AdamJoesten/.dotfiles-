@@ -1,5 +1,18 @@
 [user]
 	email = adamjoesten@gmail.com
 	name = Adam Joesten
+	signingkey = 2393C02BA7CB3037
 [init]
 	defaultBranch = main
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore_global
+[commit]
+  template = ~/.gitmessage.txt
+	gpgSign = true
+[alias]
+  l = log --pretty=short -n 50 --graph --abbrev-commit
+  wip = !git add -A && git commit -vm "WIP"
+  wipe = !git add -A && git commit -qm 'WIPE WIP' && git reset HEAD~1 --hard
+[tag]
+	gpgSign = true
