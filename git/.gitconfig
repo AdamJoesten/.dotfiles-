@@ -1,18 +1,40 @@
-[user]
-	email = adamjoesten@gmail.com
-	name = Adam Joesten
-	signingkey = 2393C02BA7CB3037
+[include]
+  path = ~/.gitconfig.local
 [init]
 	defaultBranch = main
 [core]
 	editor = nvim
-	excludesfile = ~/.gitignore_global
+	excludesfile = ~/.gitignore.global
 [commit]
   template = ~/.gitmessage.txt
-	gpgSign = true
+  gpgSign = true
+[color]
+  ui = true
 [alias]
-  l = log --pretty=short -n 50 --graph --abbrev-commit
-  wip = !git add -A && git commit -vm "WIP"
-  wipe = !git add -A && git commit -qm 'WIPE WIP' && git reset HEAD~1 --hard
+  st = status
+  cm = commit
+  co = checkout
+  cob = checkout -b
+  del = branch -D
+  br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+  undo = reset HEAD~1 --mixed
+  lg = log --pretty=short -n 50 --graph --abbrev-commit
+  lp = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
+  ll = log -1 HEAD --stat
+  di = diff
+  div = difftool -t vimdiff -y
+  fcm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+	fcmm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+  wip = !git add -A && git commit -vm "<wip>: commit checkpoint"
+  wipe = !git add -A && git commit -qm "<chore>: wipe commit checkpoint(s)" --no-verify && git reset HEAD~1 --hard
+  se = !git rev-list --all | xargs git grep -F
+  se-branch = !git rev-list $1 | xargs git grep -F $2 -
+  se-commit = !sh -c 'git rev-list $1..HEAD | xargs git grep -F $2' -
+  se-after-date = !sh -c 'git log --after="$1" --format=%H | xargs git grep -F $2' -
+  se-before-date = !sh -c 'git log --before="$1" --format=%H | xargs git grep -F $2' -
+  se-file = !sh -c 'git rev-list --all | xargs -L 1 git grep -F $2 -- $1' -
+  se-icase = !sh -c 'git rev-list --all | xargs git grep -i -F $1' -
+  se-regex = !sh -c 'git rev-list --all | xargs git grep -E $1' -
+	cmhash = !sh -c 'git log -1 --grep "$1" --format=format:%H | xclip -selection clipboard' -
 [tag]
 	gpgSign = true
