@@ -10,8 +10,8 @@
 	"git.enableSmartCommit": true,
 	"window.commandCenter": true,
 	"editor.renderWhitespace": "none",
-	"workbench.editor.untitled.hint": "hidden",
 	"markdown.validate.enabled": true,
 	"markdown.updateLinksOnFileMove.enabled": "prompt",
-	"workbench.startupEditor": "none"
+	"workbench.startupEditor": "none",
+	"workbench.editor.empty.hint": "hidden"
 }
