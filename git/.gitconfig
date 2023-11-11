@@ -10,6 +10,12 @@
   gpgSign = true
 [color]
   ui = true
+[diff]
+  tool = nvimdiff
+[difftool]
+  prompt = false
+[difftool "nvimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE
 [alias]
   st = status
   cm = commit
@@ -22,7 +28,6 @@
   lp = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
   ll = log -1 HEAD --stat
   di = diff
-  div = difftool -t vimdiff -y
   fcm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
 	fcmm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
   wip = !git add -A && git commit -vm "<wip>: commit checkpoint"
