@@ -22,16 +22,25 @@
   co = checkout
   cob = checkout -b
   del = branch -D
-  br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
   undo = reset HEAD~1 --mixed
+  wip = !git add -A && git commit -m '<wip>: Commit checkpoint'
+  wipe = "!f() { \
+    COUNT=${1-1}; \
+    WIP_COMMITS=$(git log -n $COUNT --pretty=format:%s | grep -c '<wip>'); \
+    if [ \"$WIP_COMMITS\" -eq \"$COUNT\" ]; then \
+        git add -A && git reset HEAD~$COUNT --soft; \
+        git commit -ve; \
+    else \
+        echo 'Error: Not all of the last $COUNT commits are WIP commits.'; \
+    fi; \
+   }; f"
+  # Workshopping aliases below this line (WIP)
+  br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
   lg = log --pretty=short -n 50 --graph --abbrev-commit
   lp = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
   ll = log -1 HEAD --stat
-  di = diff
   fcm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
 	fcmm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
-  wip = !git add -A && git commit -vm "<wip>: commit checkpoint"
-  wipe = !git add -A && git commit -qm "<chore>: wipe commit checkpoint(s)" --no-verify && git reset HEAD~1 --hard
   se = !git rev-list --all | xargs git grep -F
   se-branch = !git rev-list $1 | xargs git grep -F $2 -
   se-commit = !sh -c 'git rev-list $1..HEAD | xargs git grep -F $2' -
