@@ -17,38 +17,11 @@
 [difftool "nvimdiff"]
   cmd = nvim -d $LOCAL $REMOTE
 [alias]
-  st = status
-  cm = commit
-  co = checkout
-  cob = checkout -b
-  del = branch -D
   undo = reset HEAD~1 --mixed
   wip = !git add -A && git commit -m '<wip>: Commit checkpoint'
-  wipe = "!f() { \
-    COUNT=${1-1}; \
-    WIP_COMMITS=$(git log -n $COUNT --pretty=format:%s | grep -c '<wip>'); \
-    if [ \"$WIP_COMMITS\" -eq \"$COUNT\" ]; then \
-        git add -A && git reset HEAD~$COUNT --soft; \
-        git commit -ve; \
-    else \
-        echo 'Error: Not all of the last $COUNT commits are WIP commits.'; \
-    fi; \
-   }; f"
-  # Workshopping aliases below this line (WIP)
+  wipe = !~/scripts/git/wipe.sh
   br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
   lg = log --pretty=short -n 50 --graph --abbrev-commit
   lp = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
   ll = log -1 HEAD --stat
-  fcm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
-	fcmm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
-  se = !git rev-list --all | xargs git grep -F
-  se-branch = !git rev-list $1 | xargs git grep -F $2 -
-  se-commit = !sh -c 'git rev-list $1..HEAD | xargs git grep -F $2' -
-  se-after-date = !sh -c 'git log --after="$1" --format=%H | xargs git grep -F $2' -
-  se-before-date = !sh -c 'git log --before="$1" --format=%H | xargs git grep -F $2' -
-  se-file = !sh -c 'git rev-list --all | xargs -L 1 git grep -F $2 -- $1' -
-  se-icase = !sh -c 'git rev-list --all | xargs git grep -i -F $1' -
-  se-regex = !sh -c 'git rev-list --all | xargs git grep -E $1' -
-	cmhash = !sh -c 'git log -1 --grep "$1" --format=format:%H | xclip -selection clipboard' -
-[tag]
-	gpgSign = true
+	alias = ! git config --get-regexp ^alias\\. | sed -e 's/^alias\\.\\([^ ]*\\)/\\x1B[33m\\1\\x1B[0m =/'\n
