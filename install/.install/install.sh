@@ -19,6 +19,9 @@ sudo apt install -y $HOME/Downloads/1password.deb
 # asdf bun
 # asdf deno
 # asdf python
+# just
+# hyperfine
+# hexyl
 # rustlang
 # golang
 # pnpm
@@ -26,6 +29,7 @@ sudo apt install -y $HOME/Downloads/1password.deb
 # docker
 # jo
 # jt
+# jq
 # wally
 # bat
 # fdfind -> fd
