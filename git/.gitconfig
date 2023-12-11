@@ -1,10 +1,10 @@
 [include]
   path = ~/.gitconfig.local
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [core]
-	editor = nvim
-	excludesfile = ~/.gitignore.global
+  editor = $HOME/Applications/nvim.appimage
+  excludesfile = ~/.gitignore.global
 [commit]
   template = ~/.gitmessage.txt
   gpgSign = true
@@ -15,13 +15,21 @@
 [difftool]
   prompt = false
 [difftool "nvimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE
+  cmd = $HOME/Applications/nvim.appimage -d $LOCAL $REMOTE
 [alias]
   undo = reset HEAD~1 --mixed
   wip = !git add -A && git commit -m '<wip>: Commit checkpoint'
   wipe = !~/scripts/git/wipe.sh
   br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
-  lg = log --pretty=short -n 50 --graph --abbrev-commit
-  lp = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
+  lg = lg1
+  lg1 = lg1-specific --all
+  lg2 = lg2-specific --all
+  lg3 = lg3-specific --all
+
+  lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+  lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+  lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+  adog = log --all --decorate --oneline --graph
   ll = log -1 HEAD --stat
-	alias = ! git config --get-regexp ^alias\\. | sed -e 's/^alias\\.\\([^ ]*\\)/\\x1B[33m\\1\\x1B[0m =/'\n
+  alias = ! git config --get-regexp ^alias\\. | sed -e 's/^alias\\.\\([^ ]*\\)/\\x1B[33m\\1\\x1B[0m =/'\n
+  cleanup = !git branch --merged | grep -v '*' | xargs git branch -d
