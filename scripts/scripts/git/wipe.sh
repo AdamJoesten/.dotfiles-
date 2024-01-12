@@ -14,7 +14,9 @@ f() {
 		git commit -ve
 	else
 		echo "Error: Not all of the last $COUNT commits are WIP commits."
+		exit 1
 	fi
 }
 
 f "$@"
+exit 0
