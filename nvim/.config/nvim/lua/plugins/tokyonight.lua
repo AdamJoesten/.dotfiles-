@@ -1,12 +1,12 @@
 return {
-	"folke/tokyonight.nvim",
-	lazy = false, -- make sure we load plugin during startup if it is your main colorscheme
-	priority = 1000, -- make sure we load plugin before all the other start plugins
-	config = function()
-		require("tokyonight").setup({
-			style = "night",
-		})
-		-- load the colorscheme here
-		vim.cmd([[colorscheme tokyonight]])
-	end,
+  "folke/tokyonight.nvim",
+  lazy = false, -- make sure we load plugin during startup if it is your main colorscheme
+  priority = 1000, -- make sure we load plugin before all the other start plugins
+  config = function()
+    require("tokyonight").setup({
+      style = "night",
+    })
+    -- load the colorscheme here
+    vim.cmd([[colorscheme tokyonight]])
+  end,
 }
