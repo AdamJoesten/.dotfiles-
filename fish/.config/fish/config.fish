@@ -41,6 +41,9 @@ if status is-interactive
 
     # Starship
     starship init fish | source
+    
+    # Zoxide
+    zoxide init fish | source
 
     # Source asdf
     source ~/.asdf/asdf.fish
