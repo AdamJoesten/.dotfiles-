@@ -1,0 +1,7 @@
+python 3.12.0
+nodejs 20.11.0
+bun 1.0.4
+deno 1.37.1
+lua 5.4.6
+luajit 2.0.5--2.4.4
+pnpm 8.15.0
