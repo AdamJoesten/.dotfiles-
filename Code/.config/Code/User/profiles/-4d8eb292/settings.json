@@ -1,0 +1,6 @@
+{
+    "editor.fontFamily": "'0xProto Nerd Font'",
+    "editor.fontLigatures": true,
+    "terminal.integrated.fontFamily": "'0xProto Nerd Font Mono'",
+    "liveServer.settings.donotShowInfoMsg": true,
+}
