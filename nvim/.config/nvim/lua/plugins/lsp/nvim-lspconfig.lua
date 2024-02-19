@@ -11,23 +11,23 @@ return {
     { "<leader>q", vim.diagnostic.setloclist },
   },
   opts = {
-    diagnostics = {
-      underline = true,
-      update_in_insert = false,
-      virtual_text = {
-        spacing = 4,
-        source = "if_many",
-        prefix = "icons",
-      },
-      severity_sort = true,
-    },
+    -- diagnostics = {
+    --   underline = true,
+    --   update_in_insert = false,
+    --   virtual_text = {
+    --     spacing = 4,
+    --     source = "if_many",
+    --     prefix = "icons",
+    --   },
+    --   severity_sort = true,
+    -- },
     -- inlay_hints = {
     -- 	enabled = true,
     -- },
-    format = {
-      formatting_options = nil,
-      timeout_ms = nil,
-    },
+    -- format = {
+    --   formatting_options = nil,
+    --   timeout_ms = nil,
+    -- },
   },
   config = function()
     require("mason").setup({})
@@ -53,23 +53,7 @@ return {
     require("neodev").setup({})
 
     local lspconfig = require("lspconfig")
-    lspconfig.lua_ls.setup({
-      settings = {
-        Lua = {
-          workspace = {
-            checkThirdParty = false,
-          },
-          completion = {
-            callSnippet = "Both",
-            keywordSnippet = "Both",
-            displayContext = 5,
-          },
-          hint = {
-            enable = true,
-          },
-        },
-      },
-    })
+    lspconfig.lua_ls.setup({})
     lspconfig.marksman.setup({})
     lspconfig.jsonls.setup({})
   end,
