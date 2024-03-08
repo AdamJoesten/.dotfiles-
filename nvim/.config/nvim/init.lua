@@ -286,6 +286,7 @@ require('lazy').setup({
       }
     end,
   },
+  { 'folke/neodev.nvim', opts = {} },
 
   -- NOTE: Plugins can specify dependencies.
   --
@@ -406,6 +407,7 @@ require('lazy').setup({
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
+      'folke/neodev.nvim',
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -588,6 +590,7 @@ require('lazy').setup({
         'stylua', -- Used to format lua code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+      require('neodev').setup {}
 
       require('mason-lspconfig').setup {
         handlers = {
