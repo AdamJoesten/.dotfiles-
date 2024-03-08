@@ -606,7 +606,52 @@ require('lazy').setup({
       }
     end,
   },
+  {
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    ft = {
+      'javascript',
+      'typescript',
+    },
+    config = function()
+      require('typescript-tools').setup {
+        settings = {
+          tsserver_format_options = {
+            tabSize = 2,
+            indentSize = 2,
+            convertTabsToSpaces = true,
+            indentStyle = 'Smart',
+            semicolons = 'insert',
+          },
+          tsserver_file_preferences = {
+            includeInlayParameterNameHints = 'all',
+            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayVariableTypeHints = true,
+            includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayEnumMemberValueHints = true,
+          },
+          jsx_close_tag = {
+            enable = true,
+          },
+        },
+      }
+      -- TSTools Keymaps
+      local opts = { noremap = true, silent = true }
 
+      vim.keymap.set('n', '<leader>co', ':TSToolsOrganizeImports<CR>', { desc = ':TSToolsOrganizeImports<CR>', noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>cs', ':TSToolsSortImports<CR>', { desc = ':TSToolsSortImports<CR>', noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>cr', ':TSToolsRemoveUnusedImports<CR>', { desc = ':TSToolsRemoveUnusedImports<CR>', noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>cu', ':TSToolsRemoveUnused<CR>', { desc = ':TSToolsRemoveUnused<CR>', noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>ca', ':TSToolsAddMissingImports<CR>', { desc = ':TSToolsAddMissingImports<CR>', noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>cf', ':TSToolsFixAll<CR>', { desc = ':TSToolsFixAll<CR>', noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>cg', ':TSToolsGoToSourceDefinition<CR>', { desc = ':TSToolsGoToSourceDefinition<CR>', noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>cn', ':TSToolsRenameFile<CR>', { desc = ':TSToolsRenameFile<CR>', noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>ce', ':TSToolsFileReferences<CR>', { desc = ':TSToolsFileReferences<CR>', noremap = true, silent = true })
+    end,
+  },
   { -- Autoformat
     'stevearc/conform.nvim',
     opts = {
