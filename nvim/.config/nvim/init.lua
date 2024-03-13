@@ -199,6 +199,68 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
     },
+    config = function()
+      require('gitsigns').setup {
+        on_attach = function(bufnr)
+          local gs = package.loaded.gitsigns
+
+          local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+          end
+
+          -- Navigation
+          map('n', ']h', function()
+            if vim.wo.diff then
+              return ']h'
+            end
+            vim.schedule(function()
+              gs.next_hunk()
+            end)
+            return '<Ignore>'
+          end, { expr = true, desc = 'Next Git [H]unk' })
+
+          map('n', '[h', function()
+            if vim.wo.diff then
+              return '[h'
+            end
+            vim.schedule(function()
+              gs.prev_hunk()
+            end)
+            return '<Ignore>'
+          end, { expr = true, desc = 'Prev Git [H]unk' })
+
+          -- Actions
+          map('n', '<leader>ghs', gs.stage_hunk, { desc = '[S]tage' })
+          map('n', '<leader>ghr', gs.reset_hunk, { desc = '[R]eset' })
+          map('v', '<leader>ghs', function()
+            gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          end, { desc = '[S]tage' })
+          map('v', '<leader>ghr', function()
+            gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          end, { desc = '[R]eset' })
+          map('n', '<leader>ghS', gs.stage_buffer, { desc = '[S]tage Buffer' })
+          map('n', '<leader>ghu', gs.undo_stage_hunk, { desc = '[U]ndo Stage' })
+          map('n', '<leader>ghR', gs.reset_buffer, { desc = '[R]eset Buffer' })
+          map('n', '<leader>ghp', gs.preview_hunk, { desc = '[P]review' })
+          map('n', '<leader>ghb', function()
+            gs.blame_line { full = true }
+          end, { desc = 'Next Git [H]unk' })
+          map('n', '<leader>gtb', gs.toggle_current_line_blame, { desc = '[B]lame' })
+          map('n', '<leader>ghd', gs.diffthis, { desc = '[D]iff' })
+          map('n', '<leader>ghD', function()
+            gs.diffthis '~'
+          end, { desc = '[D]iff ~' })
+          map('n', '<leader>gtd', gs.toggle_deleted, { desc = '[D]eleted' })
+
+          -- Text object
+          map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'Select git hunk' }) -- TODO:
+        end,
+      }
+    end,
+  },
+
   {
     'voldikss/vim-floaterm',
     config = function()
@@ -245,6 +307,9 @@ require('lazy').setup({
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+        ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+        ['<leader>gh'] = { name = '[H]unk', _ = 'which_key_ignore' },
+        ['<leader>gt'] = { name = '[T]oggle', _ = 'which_key_ignore' },
       }
     end,
   },
