@@ -175,6 +175,14 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
+  -- Smooth scrolling
+  {
+    'karb94/neoscroll.nvim',
+    config = function()
+      require('neoscroll').setup {}
+    end,
+  },
+
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following lua:
   --    require('gitsigns').setup({ ... })
