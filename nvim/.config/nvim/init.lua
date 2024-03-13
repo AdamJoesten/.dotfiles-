@@ -549,7 +549,9 @@ require('lazy').setup({
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
     ft = {
       'javascript',
+      'javascriptreact',
       'typescript',
+      'typescriptreact',
     },
     config = function()
       require('typescript-tools').setup {
