@@ -303,6 +303,7 @@ require('lazy').setup({
       -- Document existing key chains
       require('which-key').register {
         ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+        ['<leader>cs'] = { name = '[S]urround', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
@@ -578,8 +579,22 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
-        --
-
+        denols = {
+          root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc'),
+          init_options = {
+            lint = true,
+            unstable = true,
+            suggest = {
+              imports = {
+                hosts = {
+                  ['https://deno.land'] = true,
+                  ['https://cdn.nest.land'] = true,
+                  ['https://crux.land'] = true,
+                },
+              },
+            },
+          },
+        },
         lua_ls = {
           -- cmd = {...},
           -- filetypes { ...},
@@ -651,7 +666,26 @@ require('lazy').setup({
       'typescriptreact',
     },
     config = function()
+      local lspconfig = require 'lspconfig'
       require('typescript-tools').setup {
+        on_attach = function(client, bufnr)
+          -- vim.keymap.set('n', '<leader>ro', function()
+          --   vim.lsp.buf.execute_command {
+          --     command = '_typescript.organizeImports',
+          --     arguments = { vim.fn.expand '%:p' },
+          --   }
+          -- end, { buffer = bufnr, remap = false })
+        end,
+        root_dir = function(filename)
+          local denoRootDir = lspconfig.util.root_pattern('deno.json', 'deno.json')(filename)
+          -- if root_dir function returns nil then lspconfig wont start a language server
+          if denoRootDir then
+            return nil
+          end
+
+          return lspconfig.util.root_pattern 'package.json'(filename)
+        end,
+        single_file_support = false,
         settings = {
           tsserver_format_options = {
             tabSize = 2,
@@ -669,9 +703,6 @@ require('lazy').setup({
             includeInlayPropertyDeclarationTypeHints = true,
             includeInlayFunctionLikeReturnTypeHints = true,
             includeInlayEnumMemberValueHints = true,
-          },
-          jsx_close_tag = {
-            enable = true,
           },
         },
       }
