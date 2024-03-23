@@ -560,6 +560,12 @@ require('lazy').setup({
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+      local formatters = {
+        prettierd = {},
+      }
+      local linters = {
+        eslint_d = {},
+      }
       local servers = {
         -- clangd = {},
         -- gopls = {},
@@ -613,6 +619,8 @@ require('lazy').setup({
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
+      vim.list_extend(ensure_installed, vim.tbl_keys(formatters or {}))
+      vim.list_extend(ensure_installed, vim.tbl_keys(linters or {}))
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format lua code
       })
@@ -696,7 +704,8 @@ require('lazy').setup({
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        -- javascript = { { "prettierd", "prettier" } },
+        javascript = { 'prettierd' },
+        typescript = { 'prettierd' },
       },
     },
   },
