@@ -51,4 +51,7 @@ if status is-interactive
     # goenv
     set -x GOPATH $HOME/go
 
+    # java
+    source ~/.asdf/plugins/java/set-java-home.fish
+
 end
