@@ -583,7 +583,6 @@ require('lazy').setup({
           root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc'),
           init_options = {
             lint = true,
-            unstable = true,
             suggest = {
               imports = {
                 hosts = {
@@ -668,23 +667,7 @@ require('lazy').setup({
     config = function()
       local lspconfig = require 'lspconfig'
       require('typescript-tools').setup {
-        on_attach = function(client, bufnr)
-          -- vim.keymap.set('n', '<leader>ro', function()
-          --   vim.lsp.buf.execute_command {
-          --     command = '_typescript.organizeImports',
-          --     arguments = { vim.fn.expand '%:p' },
-          --   }
-          -- end, { buffer = bufnr, remap = false })
-        end,
-        root_dir = function(filename)
-          local denoRootDir = lspconfig.util.root_pattern('deno.json', 'deno.json')(filename)
-          -- if root_dir function returns nil then lspconfig wont start a language server
-          if denoRootDir then
-            return nil
-          end
-
-          return lspconfig.util.root_pattern 'package.json'(filename)
-        end,
+        root_dir = lspconfig.util.root_pattern 'package.json',
         single_file_support = false,
         settings = {
           tsserver_format_options = {
@@ -706,18 +689,17 @@ require('lazy').setup({
           },
         },
       }
-      -- TSTools Keymaps
       local opts = { noremap = true, silent = true }
 
-      vim.keymap.set('n', '<leader>co', ':TSToolsOrganizeImports<CR>', { desc = ':TSToolsOrganizeImports<CR>', noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>cs', ':TSToolsSortImports<CR>', { desc = ':TSToolsSortImports<CR>', noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>cr', ':TSToolsRemoveUnusedImports<CR>', { desc = ':TSToolsRemoveUnusedImports<CR>', noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>cu', ':TSToolsRemoveUnused<CR>', { desc = ':TSToolsRemoveUnused<CR>', noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>ca', ':TSToolsAddMissingImports<CR>', { desc = ':TSToolsAddMissingImports<CR>', noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>cf', ':TSToolsFixAll<CR>', { desc = ':TSToolsFixAll<CR>', noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>cg', ':TSToolsGoToSourceDefinition<CR>', { desc = ':TSToolsGoToSourceDefinition<CR>', noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>cn', ':TSToolsRenameFile<CR>', { desc = ':TSToolsRenameFile<CR>', noremap = true, silent = true })
-      vim.keymap.set('n', '<leader>ce', ':TSToolsFileReferences<CR>', { desc = ':TSToolsFileReferences<CR>', noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>co', ':TSToolsOrganizeImports<CR>', { desc = ':TSToolsOrganizeImports<CR>', opts })
+      vim.keymap.set('n', '<leader>cs', ':TSToolsSortImports<CR>', { desc = ':TSToolsSortImports<CR>', opts })
+      vim.keymap.set('n', '<leader>cr', ':TSToolsRemoveUnusedImports<CR>', { desc = ':TSToolsRemoveUnusedImports<CR>', opts })
+      vim.keymap.set('n', '<leader>cu', ':TSToolsRemoveUnused<CR>', { desc = ':TSToolsRemoveUnused<CR>', opts })
+      vim.keymap.set('n', '<leader>ca', ':TSToolsAddMissingImports<CR>', { desc = ':TSToolsAddMissingImports<CR>', opts })
+      vim.keymap.set('n', '<leader>cf', ':TSToolsFixAll<CR>', { desc = ':TSToolsFixAll<CR>', opts })
+      vim.keymap.set('n', '<leader>cg', ':TSToolsGoToSourceDefinition<CR>', { desc = ':TSToolsGoToSourceDefinition<CR>', opts })
+      vim.keymap.set('n', '<leader>cn', ':TSToolsRenameFile<CR>', { desc = ':TSToolsRenameFile<CR>', opts })
+      vim.keymap.set('n', '<leader>ce', ':TSToolsFileReferences<CR>', { desc = ':TSToolsFileReferences<CR>', opts })
     end,
   },
   { -- Autoformat
@@ -736,7 +718,9 @@ require('lazy').setup({
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         javascript = { 'prettierd' },
+        javascriptreact = { 'prettierd' },
         typescript = { 'prettierd' },
+        typescriptreact = { 'prettierd' },
       },
     },
   },
