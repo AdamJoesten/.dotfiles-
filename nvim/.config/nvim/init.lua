@@ -569,7 +569,10 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
+        tsserver = {
+          root_dir = require('lspconfig').util.root_pattern 'package.json',
+          single_file_support = false,
+        },
         denols = {
           root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc'),
           init_options = {
@@ -647,51 +650,8 @@ require('lazy').setup({
     end,
   },
   {
-    'pmizio/typescript-tools.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-    ft = {
-      'javascript',
-      'javascriptreact',
-      'typescript',
-      'typescriptreact',
-    },
-    config = function()
-      local lspconfig = require 'lspconfig'
-      require('typescript-tools').setup {
-        root_dir = lspconfig.util.root_pattern 'package.json',
-        single_file_support = false,
-        settings = {
-          tsserver_format_options = {
-            tabSize = 2,
-            indentSize = 2,
-            convertTabsToSpaces = true,
-            indentStyle = 'Smart',
-            semicolons = 'insert',
-          },
-          tsserver_file_preferences = {
-            includeInlayParameterNameHints = 'all',
-            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayVariableTypeHints = true,
-            includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayEnumMemberValueHints = true,
-          },
-        },
-      }
-      local opts = { noremap = true, silent = true }
-
-      vim.keymap.set('n', '<leader>co', ':TSToolsOrganizeImports<CR>', { desc = ':TSToolsOrganizeImports<CR>', opts })
-      vim.keymap.set('n', '<leader>cs', ':TSToolsSortImports<CR>', { desc = ':TSToolsSortImports<CR>', opts })
-      vim.keymap.set('n', '<leader>cr', ':TSToolsRemoveUnusedImports<CR>', { desc = ':TSToolsRemoveUnusedImports<CR>', opts })
-      vim.keymap.set('n', '<leader>cu', ':TSToolsRemoveUnused<CR>', { desc = ':TSToolsRemoveUnused<CR>', opts })
-      vim.keymap.set('n', '<leader>ca', ':TSToolsAddMissingImports<CR>', { desc = ':TSToolsAddMissingImports<CR>', opts })
-      vim.keymap.set('n', '<leader>cf', ':TSToolsFixAll<CR>', { desc = ':TSToolsFixAll<CR>', opts })
-      vim.keymap.set('n', '<leader>cg', ':TSToolsGoToSourceDefinition<CR>', { desc = ':TSToolsGoToSourceDefinition<CR>', opts })
-      vim.keymap.set('n', '<leader>cn', ':TSToolsRenameFile<CR>', { desc = ':TSToolsRenameFile<CR>', opts })
-      vim.keymap.set('n', '<leader>ce', ':TSToolsFileReferences<CR>', { desc = ':TSToolsFileReferences<CR>', opts })
-    end,
+    'windwp/nvim-ts-autotag',
+    opts = {},
   },
   { -- Autoformat
     'stevearc/conform.nvim',
