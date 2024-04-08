@@ -256,24 +256,6 @@ require('lazy').setup({
     end,
   },
 
-  {
-    'voldikss/vim-floaterm',
-    config = function()
-      -- Set floaterm window foreground to gray once the cursor moves out from it
-      vim.cmd.hi 'FloatermNC guifg=gray'
-    end,
-    keys = {
-      { '<leader>t6', mode = 'n', ':FloatermNew<CR>', desc = ':FloatermNew<CR>', silent = true },
-      { '<leader>t6', mode = 't', '<C-\\><C-n>:FloatermNew<CR>', desc = '<C-\\><C-n>:FloatermNew<CR>', silent = true },
-      { '<leader>t7', mode = 'n', ':FloatermPrev<CR>', desc = ':FloatermPrev<CR>', silent = true },
-      { '<leader>t7', mode = 't', '<C-\\><C-n>:FloatermPrev<CR>', desc = '<C-\\><C-n>:FloatermPrev<CR>', silent = true },
-      { '<leader>t8', mode = 'n', ':FloatermNext<CR>', desc = ':FloatermNext<CR>', silent = true },
-      { '<leader>t8', mode = 't', '<C-\\><C-n>:FloatermNext<CR>', desc = '<C-\\><C-n>:FloatermNext<CR>', silent = true },
-      { '<leader>t9', mode = 'n', ':FloatermToggle<CR>', desc = ':FloatermToggle<CR>', silent = true },
-      { '<leader>t9', mode = 't', '<C-\\><C-n>:FloatermToggle<CR>', desc = '<C-\\><C-n>:FloatermToggle<CR>', silent = true },
-    },
-  },
-
   -- NOTE: Plugins can also be configured to run lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
