@@ -5,5 +5,6 @@ local config = {}
 config.color_scheme = "tokyonight_night"
 -- Font
 config.font = wezterm.font("0xProto Nerd Font")
+config.window_decorations = "RESIZE" -- Remove title bar, enable window resize
 
 return config
