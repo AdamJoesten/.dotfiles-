@@ -76,6 +76,7 @@ plugins=(
 	alias-finder
 	zsh-autosuggestions
 	zsh-syntax-highlighting
+	asdf
 )
 
 source $ZSH/oh-my-zsh.sh
