@@ -1,7 +1,0 @@
-{
-    "[java]": {
-        "editor.defaultFormatter": "redhat.java"
-    },
-    "boot-java.rewrite.reconcile": true,
-    "workbench.colorTheme": "Default High Contrast"
-}
