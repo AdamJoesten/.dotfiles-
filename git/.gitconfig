@@ -3,7 +3,7 @@
 [init]
   defaultBranch = main
 [core]
-  editor = $HOME/.local/bin/nvim.appimage
+  editor = nvim
   excludesfile = ~/.gitignore.global
 [commit]
   template = ~/.gitmessage.txt
