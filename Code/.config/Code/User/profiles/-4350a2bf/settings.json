@@ -1,4 +1,6 @@
 {
+    "editor.fontFamily": "'CaskaydiaCove Nerd Font', monospace",
+    "terminal.integrated.fontFamily": "'0xProto Nerd Font Mono', 'monospace'",
     "editor.formatOnPaste": true,
     "git.autofetch": true,
     "[markdown]":  {
@@ -18,5 +20,6 @@
     },
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "workbench.colorTheme": "Tokyo Night"
 }
