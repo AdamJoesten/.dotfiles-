@@ -469,6 +469,14 @@ require('lazy').setup({
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
+      local formatters = {
+        prettierd = {},
+      }
+
+      local linters = {
+        eslint_d = {},
+      }
+
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -491,7 +499,7 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         tsserver = {},
         --
-
+        tailwindcss = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -519,6 +527,8 @@ require('lazy').setup({
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
+      vim.list_extend(ensure_installed, vim.tbl_keys(formatters) or {})
+      vim.list_extend(ensure_installed, vim.tbl_keys(linters) or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
       })
@@ -571,7 +581,10 @@ require('lazy').setup({
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        -- javascript = { { "prettierd", "prettier" } },
+        javascript = { { 'prettierd', 'prettier' } },
+        javascriptreact = { { 'prettierd', 'prettier' } },
+        typescript = { { 'prettierd', 'prettier' } },
+        typescriptreact = { { 'prettierd', 'prettier' } },
       },
     },
   },
