@@ -3,20 +3,11 @@
 [init]
   defaultBranch = main
 [core]
-  editor = nvim
   excludesfile = ~/.gitignore.global
 [commit]
   template = ~/.gitmessage.txt
 [color]
   ui = true
-[alias]
-  s = status
-  br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
-  undo = reset HEAD~1 --mixed
-  lgl = log -1 HEAD --stat
-  adog = log --all --decorate --oneline --graph
-  alias = ! git config --get-regexp ^alias\\. | sed -e 's/^alias\\.\\([^ ]*\\)/\\x1B[33m\\1\\x1B[0m =/'\n
-  cleanup = !git branch --merged | grep -v '*' | xargs git branch -d
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
