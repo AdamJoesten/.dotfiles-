@@ -1,0 +1,15 @@
+[init]
+  defaultBranch = main
+[include]
+  path = ~/.gitconfig.local
+[core]
+  excludesfile = ~/.gitignore.global
+[commit]
+  template = ~/.gitmessage.txt
+[color]
+  ui = true
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
