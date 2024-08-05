@@ -147,3 +147,4 @@ source "$OSH"/oh-my-bash.sh
 
 # environment variables
 PATH=$PATH:~/.local/bin
+source "$HOME/.cargo/env"
