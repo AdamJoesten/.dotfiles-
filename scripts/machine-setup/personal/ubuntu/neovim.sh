@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
-add-apt-repository ppa:neovim-ppa/unstable -y
-apt-get update -y && apt-get install \
-make \
+
+sudo add-apt-repository ppa:neovim-ppa/unstable -y
+sudo apt-get update && sudo apt-get install -y make \
 gcc \
 ripgrep \
 unzip \
