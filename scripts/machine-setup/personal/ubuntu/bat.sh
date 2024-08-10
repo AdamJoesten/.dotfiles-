@@ -1,5 +1,5 @@
-#! /usr/local/env bash
+#! /usr/bin/env bash
 
-sudo apt-get update && apt-get install bat
-mkdir -p ~/.local/bin
-ln -s /usr/bin/batcat ~/.local/bin/bat
+sudo apt-get update && sudo apt-get install -y bat
+mkdir -p $HOME/.local/bin
+sudo ln -s /usr/bin/batcat $HOME/.local/bin/bat
