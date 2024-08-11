@@ -1,0 +1,6 @@
+{
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    },
+    "boot-java.rewrite.reconcile": true
+}
