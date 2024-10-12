@@ -5,7 +5,7 @@
 [core]
   excludesfile = ~/.gitignore.global
 [commit]
-  template = ~/.gitmessage.txt
+  template = ~/.gitmessage
 [color]
   ui = true
 [filter "lfs"]
