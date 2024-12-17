@@ -95,6 +95,7 @@ completions=(
 # Add wisely, as too many aliases slow down shell startup.
 aliases=(
   general
+  ls
 )
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
@@ -148,3 +149,5 @@ source "$OSH"/oh-my-bash.sh
 # environment variables
 PATH=$PATH:~/.local/bin
 source "$HOME/.cargo/env"
+source "/home/adamj/.asdf/asdf.sh"
+source "/home/adamj/.asdf/completions/asdf.bash"
