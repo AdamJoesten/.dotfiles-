@@ -196,5 +196,17 @@ export SCM_CHECK=true
 # Uncomment this to make Bash-it create alias reload.
 # export BASH_IT_RELOAD_LEGACY=1
 
+# PATH
+export PATH="$PATH:~/.local/bin"
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
+source "/home/adamj/.asdf/asdf.sh"
+source "/home/adamj/.asdf/completions/asdf.bash"
+
+# pnpm
+export PNPM_HOME="/home/adamj/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

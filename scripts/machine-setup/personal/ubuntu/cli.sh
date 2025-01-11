@@ -5,10 +5,8 @@ sudo bash -c "cd /usr/local && wget -O - https://github.com/micha/json-table/raw
 
 # fd jq openocd ripgrep
 sudo apt-get install fd-find jq ripgrep
+mkdir -p ~/.local/bin/
 sudo ln -s $(which fdfind) $HOME/.local/bin/fd
 
-# nvim
-source ./neovim.sh
-
 # pico
-sudo apt-get install cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential gdb-multiarch openocd g++ libstdc++-arm-none-eabi-newlib
+# sudo apt-get install cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential gdb-multiarch openocd g++ libstdc++-arm-none-eabi-newlib
